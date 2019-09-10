@@ -35,10 +35,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     masterclear.allow_retain_esim_profiles_after_fdr=true
 
-# Enforce privapp-permissions whitelist
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=enforce
-
 # Enable on-access verification of priv apps. This requires fs-verity support in kernel.
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.apk_verity.mode=1
