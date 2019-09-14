@@ -1,5 +1,5 @@
 #
-# Copyright 2019 The Android Open Source Project
+# Copyright 2019 The Dirty Unicorns Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_bonito.mk \
-    $(LOCAL_DIR)/aosp_sargo.mk
+    $(LOCAL_DIR)/du_bonito.mk \
+    $(LOCAL_DIR)/du_sargo.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_bonito-userdebug \
-    aosp_sargo-userdebug
+    du_bonito-user \
+    du_bonito-userdebug \
+    du_sargo-user \
+    du_sargo-userdebug

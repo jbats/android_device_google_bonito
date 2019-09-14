@@ -1,5 +1,4 @@
-#
-# Copyright 2019 The Android Open Source Project
+# Copyright (C) 2019 The Dirty Unicorns Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,19 +11,27 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-# Inherit from the common Open Source product configuration
+# Include DU common configuration.
+include vendor/du/config/common_full_phone.mk
+
+# Inherit from the common Open Source product configuration.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline.mk)
 
+# Inherit device specific makefile.
 $(call inherit-product, device/google/bonito/device-bonito.mk)
 
-PRODUCT_MANUFACTURER := Google
-PRODUCT_BRAND := Android
-PRODUCT_NAME := aosp_bonito
+PRODUCT_NAME := du_bonito
 PRODUCT_DEVICE := bonito
-PRODUCT_MODEL := AOSP on bonito
+PRODUCT_BRAND := Google
+PRODUCT_MODEL := Pixel 3a XL
+PRODUCT_MANUFACTURER := Google
 
-PRODUCT_COPY_FILES += \
-    device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=bonito \
+    BUILD_FINGERPRINT=google/bonito/bonito:10/QP1A.190711.020/5800535:user/release-keys \
+    PRIVATE_BUILD_DESC="bonito-user 10 QP1A.190711.020 5800535 release-keys"
+
+$(call inherit-product-if-exists, vendor/google/bonito/bonito-vendor.mk)
+$(call inherit-product-if-exists, vendor/pixelgapps/pixel-gapps.mk)

@@ -1,5 +1,4 @@
-#
-# Copyright 2019 The Android Open Source Project
+# Copyright (C) 2019 The Dirty Unicorns Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,23 +11,31 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-# Inherit from the common Open Source product configuration
+# Include DU common configuration.
+include vendor/du/config/common_full_phone.mk
+
+# Inherit from the common Open Source product configuration.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline.mk)
 
+# Inherit device specific makefile.
 $(call inherit-product, device/google/bonito/device-sargo.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.ringtone=Ring_Synth_04.ogg \
     ro.com.android.dataroaming=true
 
-PRODUCT_MANUFACTURER := Google
-PRODUCT_BRAND := Android
-PRODUCT_NAME := aosp_sargo
+PRODUCT_NAME := du_sargo
 PRODUCT_DEVICE := sargo
-PRODUCT_MODEL := AOSP on sargo
+PRODUCT_BRAND := Google
+PRODUCT_MODEL := Pixel 3a
+PRODUCT_MANUFACTURER := Google
 
-PRODUCT_COPY_FILES += \
-    device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=sargo \
+    BUILD_FINGERPRINT=google/sargo/sargo:10/QP1A.190711.020/5800535:user/release-keys \
+    PRIVATE_BUILD_DESC="sargo-user 10 QP1A.190711.020 5800535 release-keys"
+
+$(call inherit-product-if-exists, vendor/google/sargo/sargo-vendor.mk)
+$(call inherit-product-if-exists, vendor/pixelgapps/pixel-gapps.mk)
