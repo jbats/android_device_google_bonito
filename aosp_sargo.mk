@@ -1,5 +1,5 @@
 #
-# Copyright 2016 The Android Open Source Project
+# Copyright 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,19 +19,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline.mk)
 
 $(call inherit-product, device/google/bonito/device-sargo.mk)
-$(call inherit-product-if-exists, vendor/google_devices/bonito/proprietary/device-vendor.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.ringtone=Ring_Synth_04.ogg \
-    ro.com.android.dataroaming=true \
-
-PRODUCT_PACKAGES += \
-    PhotoTable \
-    WallpaperPicker \
-    WAPPushManager \
-
-# STOPSHIP deal with Qualcomm stuff later
-# PRODUCT_RESTRICT_VENDOR_FILES := all
+    ro.com.android.dataroaming=true
 
 PRODUCT_MANUFACTURER := Google
 PRODUCT_BRAND := Android
@@ -40,5 +31,4 @@ PRODUCT_DEVICE := sargo
 PRODUCT_MODEL := AOSP on sargo
 
 PRODUCT_COPY_FILES += \
-    device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml \
-    $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
+    device/sample/etc/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml

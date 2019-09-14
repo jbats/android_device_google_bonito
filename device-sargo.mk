@@ -1,5 +1,5 @@
 #
-# Copyright 2016 The Android Open Source Project
+# Copyright 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,6 @@ include device/google/bonito/device-common.mk
 
 DEVICE_PACKAGE_OVERLAYS += device/google/bonito/sargo/overlay
 
-PRODUCT_COPY_FILES += \
-    device/google/bonito/nfc/libnfc-nxp.sargo.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
-
 PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.height_ratio=1.2
 
 # Vibrator HAL
@@ -33,10 +30,6 @@ PRODUCT_PRODUCT_PROPERTIES +=\
     ro.vibrator.hal.short.voltage=110 \
     ro.vibrator.hal.long.voltage=80 \
     ro.vibrator.hal.long.frequency.shift=10
-
-# DRV2624 Haptics Waveform
-PRODUCT_COPY_FILES += \
-    device/google/bonito/vibrator/drv2624/drv2624_S4.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
 
 # camera front flashColor
 PRODUCT_PROPERTY_OVERRIDES += \

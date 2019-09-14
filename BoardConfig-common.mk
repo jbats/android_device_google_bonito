@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 The Android Open-Source Project
+# Copyright (C) 2019 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,15 +52,8 @@ BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/7c4000.sdhci
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
-ifeq ($(filter-out bonito_kasan sargo_kasan, $(TARGET_PRODUCT)),)
-BOARD_KERNEL_OFFSET      := 0x80000
-BOARD_KERNEL_TAGS_OFFSET := 0x02500000
-BOARD_RAMDISK_OFFSET     := 0x02700000
-BOARD_MKBOOTIMG_ARGS     := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-else
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
-endif
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_BOOT_HEADER_VERSION := 2
@@ -109,6 +102,7 @@ BOARD_SUPER_PARTITION_METADATA_DEVICE := system
 BOARD_SUPER_PARTITION_BLOCK_DEVICES := system vendor
 BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3267362816
 BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 805306368
+
 # Assume 4MB metadata size.
 # TODO(b/117997386): Use correct metadata size.
 BOARD_GOOGLE_DYNAMIC_PARTITIONS_SIZE := 4068474880
@@ -186,14 +180,14 @@ TARGET_USES_COLOR_METADATA := true
 TARGET_USES_DRM_PP := true
 
 # Vendor Interface Manifest
-DEVICE_MANIFEST_FILE := device/google/bonito/manifest.xml
-DEVICE_MATRIX_FILE := device/google/bonito/compatibility_matrix.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/google/bonito/device_framework_matrix.xml
+DEVICE_MANIFEST_FILE := device/google/bonito/hidl/manifest.xml
+DEVICE_MATRIX_FILE := device/google/bonito/hidl/compatibility_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/google/bonito/hidl/device_framework_matrix.xml
 
 # Userdebug only Vendor Interface Manifest
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-DEVICE_FRAMEWORK_MANIFEST_FILE += device/google/bonito/framework_manifest_userdebug.xml
-DEVICE_MATRIX_FILE += device/google/bonito/compatibility_matrix_userdebug.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE += device/google/bonito/hidl/framework_manifest_userdebug.xml
+DEVICE_MATRIX_FILE += device/google/bonito/hidl/compatibility_matrix_userdebug.xml
 endif
 
 ODM_MANIFEST_SKUS := \
@@ -256,5 +250,3 @@ endif
 
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/b4s4-setup.sh
-
--include vendor/google_devices/bonito/proprietary/BoardConfigVendor.mk
