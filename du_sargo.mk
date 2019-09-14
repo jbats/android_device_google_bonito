@@ -33,9 +33,14 @@ PRODUCT_MODEL := Pixel 3a
 PRODUCT_MANUFACTURER := Google
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=sargo \
-    BUILD_FINGERPRINT=google/sargo/sargo:10/QP1A.190711.020/5800535:user/release-keys \
+    PRODUCT_NAME="sargo" \
+    TARGET_DEVICE="sargo" \
     PRIVATE_BUILD_DESC="sargo-user 10 QP1A.190711.020 5800535 release-keys"
+
+BUILD_FINGERPRINT := google/sargo/sargo:10/QP1A.190711.020/5800535:user/release-keys
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.fingerprint=google/sargo/sargo:10/QP1A.190711.020/5800535:user/release-keys
 
 $(call inherit-product-if-exists, vendor/google/sargo/sargo-vendor.mk)
 $(call inherit-product-if-exists, vendor/pixelgapps/pixel-gapps.mk)
